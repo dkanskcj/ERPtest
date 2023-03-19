@@ -1,0 +1,11 @@
+{
+    "/enjoysoft":{
+        "target": "https://api-kmachine-dev.enjoysoft.net:7091/api/KMachine/v1",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite":{
+            "^/enjoysoft": ""
+        }
+    }
+}

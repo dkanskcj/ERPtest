@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { ModalController } from '@ionic/angular';
+type index = {
+  test: string;
+  num: number;
+}
 @Component({
   selector: 'app-folder',
   templateUrl: './folder.page.html',
@@ -8,7 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FolderPage implements OnInit {
   public folder!: string;
-
+  testList: index[] = [
+    {
+      test: "sad",
+      num: 1234
+    }
+  ]
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {

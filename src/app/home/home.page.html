@@ -1,0 +1,74 @@
+<!-- <ion-content>
+  <div class="w-full h-full flex">
+    <div class="w-[18rem] h-screen bg-[#001650]">
+      <div class="px-5">
+        <div class="flex pt-2 items-center gap-4">
+          <img src="http://www.enjoysoft.net/images/logo.png">
+          <div class="flex justify-center text-2xl text-bold text-white">ERP</div>
+        </div>
+        <div class="space-y-2 text-white text-semibold">
+          <div class="flex items-center py-5">
+            <div class="w-full border-b border-b-[#4a5077]"></div>
+          </div>
+          <div class="flex items-center justify-between cursor-pointer" *ngFor="let menu of menus; index as i">
+            <div class="cursor-pointer" [routerLink]="menu.url">{{menu.name}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <ion-content>
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+  </div>
+
+</ion-content> -->
+<ion-content>
+  <div class="w-full h-full flex">
+    <div class="flex-col w-[18rem] items-start px-5 bg-primary text-primary-nosel_dot">
+      <div class="text-white pt-2 flex justify-center" routerLink="/">
+        <div class="rounded-[0.75rem] flex cursor-pointer items-center justify-center hover:bg-primary-select gap-4">
+          <img src="http://www.enjoysoft.net/images/logo.png">
+          <div class="text-white text-2xl text-bold" routerLink="/">ERP</div>
+        </div>
+      </div>
+      <!-- <div class="h-[0.0625rem] pt-5 bg-primary-Lighter"></div> -->
+      <div class="flex items-center pt-5">
+        <div class="w-full border-b border-b-[#4a5077]"></div>
+      </div>
+      <div class="py-5">
+        <div class="space-y-2">
+          <div *ngFor="let menu of menus; index as i">
+            <!-- 상위 메뉴 -->
+            <div (click)="menu.isOpen = !menu.isOpen"
+              class="flex justify-between px-5 py-3 w-full hover:bg-primary-select cursor-pointer rounded-[0.75rem]"
+              [routerLink]="menu.url">
+              <div class="flex gap-3 justify-between text-white">
+                <img [src]="menu.icon">{{menu.name}}
+              </div>
+              <img src="assets/icons/accordian.svg" *ngIf="menu.children?.length > 0 && !menu.isOpen">
+              <img src="assets/icons/accordian_top.svg" *ngIf="menu.children?.length > 0 && menu.isOpen">
+            </div>
+            <!-- 하위 메뉴 -->
+            <div class="flex flex-col rounded-lg bg-primary-noselect" *ngIf="menu.children?.length > 0 && menu.isOpen">
+              <ng-container *ngFor="let child of menu.children; index as i">
+                <div (click)="clickedChild($event)"
+                  [ngClass]="child.url === currentUrl ? 'bg-primary-select text-white':'bg-primary-noselect'"
+                  class="bg-primary-noselect rounded-[0.75rem] flex justify-between rounded-t-lg px-5 py-[1.03125rem] space-x-3 w-full hover:bg-primary-select cursor-pointer"
+                  [routerLink]="child.url">
+                  <div class="flex gap-3 justify-between">
+                    <img src="assets/icons/Dot.svg" *ngIf="child.url === currentUrl">
+                    <img src="assets/icons/nosel_Dot.svg" *ngIf="child.url !== currentUrl">{{ child.name }}
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ion-content>
+        <ion-router-outlet [animated]="false">
+        </ion-router-outlet>
+    </ion-content>
+  </div>
+</ion-content>
